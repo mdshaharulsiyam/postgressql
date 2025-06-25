@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS "Students" (
   date_of_birth DATE CHECK (
         date_of_birth BETWEEN '1900-01-01' AND CURRENT_DATE
   ),
-  email VARCHAR(60),
+  email VARCHAR(60) UNIQUE,
   department_id INT,
   CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Department"(department_id) ON DELETE CASCADE
 );
