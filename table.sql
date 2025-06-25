@@ -84,3 +84,19 @@ CREATE TABLE IF NOT EXISTS "Instructors"(
   instructor_name VARCHAR(100) NOT NULL,
   department_id INT REFERENCES "Departments"(department_id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS "Enrollments" (
+  enrollment_id SERIAL PRIMARY KEY,
+  student_id INT REFERENCES "Students"(student_id) ON DELETE CASCADE,
+  course_id INT REFERENCES "Courses"(course_id) ON DELETE CASCADE,
+  grade NUMERIC(4,2) CHECK (grade BETWEEN 0 AND 100),
+  enrollment_date DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE IF NOT EXISTS "CourseAssignments" (
+  id SERIAL PRIMARY KEY,
+  course_id INT REFERENCES "Courses"(course_id),
+  instructor_id INT REFERENCES "Instructors"(instructor_id),
+  semester VARCHAR(10),
+  year INT
+);
