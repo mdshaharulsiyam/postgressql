@@ -53,19 +53,19 @@ CREATE TABLE "Employee" (
 
 
 
-CREATE TABLE "Courses"(
+CREATE TABLE IF NOT EXISTS "Courses" (
   course_id SERIAL PRIMARY KEY,
   course_name VARCHAR(100) NOT NULL,
-  credits INT CHECK(credits BETWEEN 1 AND 10)
-)
+  credits INT CHECK (credits BETWEEN 1 AND 10)
+);
 
-CREATE TABLE "Departments"(
+CREATE TABLE IF NOT EXISTS "Departments"(
   department_id SERIAL PRIMARY KEY,
   department_name VARCHAR(50)
-)
+);
 
 
-CREATE TABLE "Students" (
+CREATE TABLE IF NOT EXISTS "Students" (
   student_id SERIAL PRIMARY KEY,
   student_name VARCHAR(30) NOT NULL,
   roll INT NOT NULL,
@@ -77,5 +77,10 @@ CREATE TABLE "Students" (
   email VARCHAR(60),
   department_id INT,
   CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Department"(department_id) ON DELETE CASCADE
-)
+);
 
+CREATE TABLE IF NOT EXISTS "Instructors"(
+  instructor_id SERIAL PRIMARY KEY,
+  instructor_name VARCHAR(100) NOT NULL,
+  department_id INT REFERENCES "Departments"(department_id) ON DELETE CASCADE
+);
