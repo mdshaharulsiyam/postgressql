@@ -1,7 +1,9 @@
-CREATE TABLE "Department" (
+
+CREATE TABLE IF NOT EXISTS "Departments"(
   department_id SERIAL PRIMARY KEY,
-  name VARCHAR(50) NOT NULL
-)
+  department_name VARCHAR(50)
+);
+
 
 CREATE TABLE "Employee" (
   employee_id SERIAL PRIMARY KEY,
@@ -9,7 +11,7 @@ CREATE TABLE "Employee" (
   last_name VARCHAR(50) NOT NULL,
   about TEXT,
   department_id INT,
-  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Department"(department_id) ON DELETE CASCADE
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Departments"(department_id) ON DELETE CASCADE
 );
 
 
@@ -17,11 +19,6 @@ CREATE TABLE IF NOT EXISTS "Courses" (
   course_id SERIAL PRIMARY KEY,
   course_name VARCHAR(100) NOT NULL,
   credits INT CHECK (credits BETWEEN 1 AND 10)
-);
-
-CREATE TABLE IF NOT EXISTS "Departments"(
-  department_id SERIAL PRIMARY KEY,
-  department_name VARCHAR(50)
 );
 
 
@@ -36,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "Students" (
   ),
   email VARCHAR(60) UNIQUE,
   department_id INT,
-  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Department"(department_id) ON DELETE CASCADE
+  CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES "Departments"(department_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS "Instructors"(
