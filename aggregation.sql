@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS total, MAX(fees) AS max_fee, MIN(fees) AS min_fee, AVG(fees) AS avg_fee FROM "Students";
