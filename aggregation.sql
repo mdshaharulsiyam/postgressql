@@ -5,6 +5,7 @@ SELECT
   AVG(fees) AS avg_fee_per_dept,
   MAX(fees) AS max_fee_per_dept,
   MIN(fees) AS min_fee_per_dept,
+  SUM(fees) AS total_fee_per_dept ,
     d.department_name AS department
 FROM 
   "Students" s
