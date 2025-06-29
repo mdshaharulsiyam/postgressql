@@ -3,6 +3,8 @@ SELECT COUNT(*) AS total, MAX(fees) AS max_fee, MIN(fees) AS min_fee, AVG(fees) 
 SELECT 
   COUNT(*) AS student_per_dept,
   AVG(fees) AS avg_fee_per_dept,
+  MAX(fees) AS max_fee_per_dept,
+  MIN(fees) AS min_fee_per_dept,
     d.department_name AS department
 FROM 
   "Students" s
