@@ -15,3 +15,5 @@ GROUP BY
   d.department_name;
 
 SELECT EXTRACT(YEAR FROM AGE(date_of_birth)) AS age_in_years ,student_name,date_of_birth FROM "Students" WHERE date_of_birth BETWEEN '1990-01-01' AND '1999-12-31';
+
+SELECT COUNT(*) AS total_student , EXTRACT(YEAR FROM date_of_birth) AS years FROM "Students" GROUP BY years;
