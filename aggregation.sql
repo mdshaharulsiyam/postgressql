@@ -32,4 +32,13 @@ SELECT
    d.department_id
    FROM "Departments" d
    INNER JOIN "Students" s ON d.department_id = s.department_id 
-   GROUP BY department_id
+   GROUP BY d.department_id ORDER BY total_student DESC LIMIT 5;
+
+SELECT 
+about,
+ email, 
+ student_name, fees,
+   EXTRACT(YEAR FROM date_of_birth) AS birth_year
+   FROM "Students"
+ORDER BY fees DESC
+LIMIT 3;
