@@ -96,3 +96,13 @@ LEFT JOIN "Students" s ON s.student_id = e.student_id
 GROUP BY c.course_id, c.course_name
 ORDER BY total_students DESC;
 --  this query in up written by chatgpt
+
+SELECT 
+  c.course_id,
+  c.course_name,
+  ROUND(AVG(e.grade), 2) AS average_grade
+FROM "Courses" c
+JOIN "Enrollments" e ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_name
+ORDER BY average_grade DESC
+LIMIT 5;
