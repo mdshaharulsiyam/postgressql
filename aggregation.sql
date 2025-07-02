@@ -42,3 +42,14 @@ about,
    FROM "Students"
 ORDER BY fees DESC
 LIMIT 3;
+
+SELECT 
+d.department_id ,
+d.department_name,
+AVG(s.fees) AS fees
+FROM "Departments" d
+INNER JOIN "Students" s 
+ON s.department_id=d.department_id
+ GROUP BY d.department_id 
+ ORDER BY d.department_id DESC
+  LIMIT 1; 
