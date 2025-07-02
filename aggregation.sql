@@ -52,4 +52,47 @@ INNER JOIN "Students" s
 ON s.department_id=d.department_id
  GROUP BY d.department_id 
  ORDER BY d.department_id DESC
-  LIMIT 1; 
+  LIMIT 3; 
+
+  SELECT 
+e.enrollment_id,
+c.course_name,
+e.grade,
+e.enrollment_date,
+  (SELECT COUNT(*) FROM "Students" s  WHERE e.student_id =s.student_id) AS total_student 
+  FROM "Enrollments" e 
+  INNER JOIN "Courses" c ON c.course_id=e.course_id;
+  SELECT 
+  c.course_id,
+  c.course_name,
+  COUNT(e.student_id) AS total_enrollments
+FROM "Enrollments" e
+INNER JOIN "Courses" c ON c.course_id = e.course_id
+GROUP BY c.course_id, c.course_name
+ORDER BY total_enrollments DESC
+LIMIT 3;
+
+-- this query bellow is not my 
+SELECT 
+  c.course_id,
+  c.course_name,
+  COUNT(e.student_id) AS total_students,
+  COALESCE(
+    JSON_AGG(
+      JSON_BUILD_OBJECT(
+        'student_id', s.student_id,
+        'student_name', s.student_name,
+        'email', s.email,
+        'roll', s.roll,
+        'fees', s.fees,
+        'dob', s.date_of_birth
+      )
+    ) FILTER (WHERE s.student_id IS NOT NULL),
+    '[]'
+  ) AS students
+FROM "Courses" c
+LEFT JOIN "Enrollments" e ON c.course_id = e.course_id
+LEFT JOIN "Students" s ON s.student_id = e.student_id
+GROUP BY c.course_id, c.course_name
+ORDER BY total_students DESC;
+--  this query in up written by chatgpt
