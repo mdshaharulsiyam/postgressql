@@ -25,4 +25,11 @@ SELECT
   AS average_grade
    FROM "Courses" c 
    ORDER BY average_grade DESC LIMIT 5;
-   
+
+   SELECT 
+   COUNT(*) AS total_student,
+   d.department_name,
+   d.department_id
+   FROM "Departments" d
+   INNER JOIN "Students" s ON d.department_id = s.department_id 
+   GROUP BY department_id
